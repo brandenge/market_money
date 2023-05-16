@@ -4,4 +4,8 @@ class Market < ApplicationRecord
 
   validates :name, presence: true
   validates :state, presence: true
+
+  def vendor_count
+    vendors.count
+  end
 end
