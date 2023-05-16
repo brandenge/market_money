@@ -15,7 +15,7 @@ class MarketSerializer
 
   private
 
-  def market_hash(market)
+  def self.market_hash(market)
     {
       id: market.id,
       type: 'market',
