@@ -8,6 +8,16 @@ FactoryBot.define do
     zip { Faker::Address.zip }
     lat { Faker::Address.latitude }
     lon { Faker::Address.longitude }
+
+    factory :market_with_vendors do
+      transient do
+        vendor_count { 5 }
+      end
+
+      after(:create) do |market, evaluator|
+        create_list(:market_vendor, evaluator.vendor_count, market: market)
+      end
+    end
   end
 
   factory :vendor do
@@ -22,3 +32,4 @@ FactoryBot.define do
     association :market, factory: :market, strategy: :create
     association :vendor, factory: :vendor, strategy: :create
   end
+end
