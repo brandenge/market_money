@@ -5,7 +5,7 @@ RSpec.describe 'Market API', type: :request do
     it 'responds with a list of markets' do
       market_object = create(:market)
 
-      get "/api/v0/markets/#{market_object.id}"
+      get api_v0_market_path(market_object)
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -56,7 +56,7 @@ RSpec.describe 'Market API', type: :request do
   context 'using an invalid market id' do
     it 'responds with error details' do
       invalid_id = 123123123123
-      get "/api/v0/markets/#{invalid_id}"
+      get api_v0_market_path(invalid_id)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
