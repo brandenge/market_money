@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Markets API', type: :request do
+RSpec.describe 'Market API', type: :request do
   context 'using a valid market id' do
     it 'responds with a list of markets' do
       market_object = create(:market)
@@ -13,7 +13,7 @@ RSpec.describe 'Markets API', type: :request do
       market = JSON.parse(response.body, symbolize_names: true)
 
       expect(market).to have_key(:data)
-      expect(market[:data]).to be_an(Hash)
+      expect(market[:data]).to be_a(Hash)
 
       expect(market[:data]).to have_key(:id)
       expect(market[:data][:id]).to be_a(String)
