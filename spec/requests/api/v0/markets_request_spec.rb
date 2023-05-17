@@ -4,7 +4,7 @@ RSpec.describe 'Markets API', type: :request do
   it 'sends a list of markets' do
     create_list(:market, 5)
 
-    get api_v0_markets_path
+    get api_v0_markets_path, headers: JSON_HEADER
 
     expect(response).to be_successful
 

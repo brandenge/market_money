@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Vendor API', type: :request do
   context 'using a valid vendor id' do
-    it 'responds with a vendor' do
+    it 'sends the requested vendor' do
       vendor_object = create(:vendor)
 
-      get api_v0_vendor_path(vendor_object)
+      get api_v0_vendor_path(vendor_object), headers: JSON_HEADER
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -42,9 +42,9 @@ RSpec.describe 'Vendor API', type: :request do
   end
 
   context 'using an invalid market id' do
-    it 'responds with error details' do
+    it 'sends error details' do
       invalid_id = 123123123123
-      get api_v0_vendor_path(invalid_id)
+      get api_v0_vendor_path(invalid_id), headers: JSON_HEADER
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)

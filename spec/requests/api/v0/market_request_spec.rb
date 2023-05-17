@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Market API', type: :request do
   context 'using a valid market id' do
-    it 'responds with a list of markets' do
+    it 'sends the requested market' do
       market_object = create(:market)
 
-      get api_v0_market_path(market_object)
+      get api_v0_market_path(market_object), headers: JSON_HEADER
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -54,9 +54,9 @@ RSpec.describe 'Market API', type: :request do
   end
 
   context 'using an invalid market id' do
-    it 'responds with error details' do
+    it 'sends error details' do
       invalid_id = 123123123123
-      get api_v0_market_path(invalid_id)
+      get api_v0_market_path(invalid_id), headers: JSON_HEADER
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
