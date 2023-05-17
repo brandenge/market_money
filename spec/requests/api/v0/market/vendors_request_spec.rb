@@ -6,7 +6,7 @@ RSpec.describe 'Market Vendors API', type: :request do
       market = create(:market_with_vendors, vendor_count: 5)
       expect(market.vendor_count).to eq(5)
 
-      get api_v0_market_vendors_path(market_object)
+      get api_v0_market_vendors_path(market)
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -31,16 +31,16 @@ RSpec.describe 'Market Vendors API', type: :request do
         expect(vendor[:attributes][:name]).to be_a(String)
 
         expect(vendor[:attributes]).to have_key(:description)
-        expect(vendor[:attributes][:street]).to be_a(String)
+        expect(vendor[:attributes][:description]).to be_a(String)
 
         expect(vendor[:attributes]).to have_key(:contact_name)
-        expect(vendor[:attributes][:city]).to be_a(String)
+        expect(vendor[:attributes][:contact_name]).to be_a(String)
 
         expect(vendor[:attributes]).to have_key(:contact_phone)
-        expect(vendor[:attributes][:county]).to be_a(String)
+        expect(vendor[:attributes][:contact_phone]).to be_a(String)
 
         expect(vendor[:attributes]).to have_key(:credit_accepted)
-        expect(vendor[:attributes][:state]).to be_a(Boolean)
+        expect(vendor[:attributes][:credit_accepted]).to be_in([true, false])
       end
     end
   end
