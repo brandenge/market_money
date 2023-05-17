@@ -17,7 +17,7 @@ class MarketSerializer
 
   def market_hash(market)
     {
-      id: market.id,
+      id: market.id.to_s,
       type: 'market',
       attributes: {
         name: market.name,

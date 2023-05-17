@@ -16,7 +16,7 @@ RSpec.describe 'Markets API', type: :request do
 
     markets[:data].each do |market|
       expect(market).to have_key(:id)
-      expect(market[:id]).to be_an(Integer)
+      expect(market[:id]).to be_a(String)
 
       expect(market).to have_key(:type)
       expect(market[:type]).to eq('market')
