@@ -1,15 +1,19 @@
 class MarketSerializer
-  def format_markets(markets)
+  def initialize(market_data)
+    @market_data = market_data
+  end
+
+  def format_markets
     {
-      data: markets.map do |market|
+      data: @market_data.map do |market|
         market_hash(market)
       end
     }
   end
 
-  def format_market(market)
+  def format_market
     {
-      data: market_hash(market)
+      data: market_hash(@market_data)
     }
   end
 
