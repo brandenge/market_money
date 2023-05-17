@@ -13,7 +13,7 @@ class Api::V0::MarketsController < ApplicationController
 
   private
 
-  def not_found(exception)
-    render json: ErrorSerializer.new(exception).format_not_found, status: :not_found
+  def not_found(error)
+    render json: ErrorSerializer.new(error).format_not_found, status: :not_found
   end
 end

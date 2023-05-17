@@ -1,13 +1,13 @@
 class ErrorSerializer
-  def initialize(exception)
-    @exception = exception
+  def initialize(error)
+    @error = error
   end
 
   def format_not_found
     {
       errors: [
         {
-          detail: @exception.message
+          detail: @error.message
         }
       ]
     }
