@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Market Vendors API', type: :request do
   context 'using a valid market id' do
-    it 'responds with a list of markets' do
+    it 'responds with a list of vendors for the given market id' do
       market = create(:market_with_vendors, vendor_count: 5)
       expect(market.vendor_count).to eq(5)
 
