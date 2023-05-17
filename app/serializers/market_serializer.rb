@@ -1,5 +1,5 @@
 class MarketSerializer
-  def self.format_markets(markets)
+  def format_markets(markets)
     {
       data: markets.map do |market|
         market_hash(market)
@@ -7,7 +7,7 @@ class MarketSerializer
     }
   end
 
-  def self.format_market(market)
+  def format_market(market)
     {
       data: market_hash(market)
     }
@@ -15,7 +15,7 @@ class MarketSerializer
 
   private
 
-  def self.market_hash(market)
+  def market_hash(market)
     {
       id: market.id,
       type: 'market',
