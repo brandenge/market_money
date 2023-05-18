@@ -68,6 +68,8 @@ RSpec.describe 'Market API', type: :request do
 
       expect(error_response[:errors][0]).to have_key(:detail)
       expect(error_response[:errors][0][:detail]).to be_a(String)
+      expect(error_response[:errors][0][:detail])
+        .to eq("Couldn't find Market with 'id'=#{invalid_id}")
     end
   end
 end

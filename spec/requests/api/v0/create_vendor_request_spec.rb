@@ -70,6 +70,8 @@ RSpec.describe 'Create Vendor API', type: :request do
 
       expect(error_response[:errors][0]).to have_key(:detail)
       expect(error_response[:errors][0][:detail]).to be_a(String)
+      expect(error_response[:errors][0][:detail])
+        .to eq("Validation failed: Contact name can't be blank, Contact phone can't be blank")
     end
   end
 end
