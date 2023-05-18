@@ -20,7 +20,7 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      patch api_v0_vendors_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendor_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
 
@@ -52,7 +52,7 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      patch api_v0_vendors_path(invalid_id), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendor_path(invalid_id), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
 
@@ -75,7 +75,7 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      patch api_v0_vendors_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendor_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
 
