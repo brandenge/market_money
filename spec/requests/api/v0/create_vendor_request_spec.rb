@@ -29,6 +29,8 @@ RSpec.describe 'Create Vendor API', type: :request do
 
   context 'has missing attributes' do
     it 'sends error details' do
+      create(:vendor)
+
       vendor_params = {
         name: 'Buzzy Bees',
         description: 'local honey and wax products',
@@ -40,7 +42,7 @@ RSpec.describe 'Create Vendor API', type: :request do
       last_vendor = Vendor.last
 
       expect(last_vendor.name).to_not eq(vendor_params[:name])
-      expect(last_vendor.name).to_not eq(vendor_params[:description])
+      expect(last_vendor.description).to_not eq(vendor_params[:description])
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
