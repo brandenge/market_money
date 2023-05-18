@@ -32,7 +32,7 @@ RSpec.describe 'Destroy Vendor API', type: :request do
 
       expect(Vendor.count).to eq(1)
       expect{ Vendor.find(@vendor.id) }
-      .to_not raise_error(ActiveRecord::RecordNotFound)
+      .to_not raise_error
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
