@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Delete Vendor API', type: :request do
+RSpec.describe 'Destroy Vendor API', type: :request do
   before(:each) do
     @vendor = create(:vendor)
   end
 
   context 'using a valid vendor id' do
-    it 'can delete a vendor' do
+    it 'can destroy a vendor' do
       expect(Vendor.count).to eq(1)
 
       expect{ delete api_v0_vendor_path(@vendor), headers: JSON_HEADER }
@@ -33,7 +33,7 @@ RSpec.describe 'Delete Vendor API', type: :request do
       expect(Vendor.count).to eq(1)
       expect{ Vendor.find(@vendor.id) }
       .to_not raise_error(ActiveRecord::RecordNotFound)
-      
+
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
 
