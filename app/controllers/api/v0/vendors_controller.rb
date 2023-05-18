@@ -15,6 +15,12 @@ class Api::V0::VendorsController < ApplicationController
     render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: :ok
   end
 
+  def destroy
+    vendor = Vendor.find(params[:id])
+    vendor.destroy!
+    render body: nil, status: :no_content
+  end
+
   private
 
   def strong_params
