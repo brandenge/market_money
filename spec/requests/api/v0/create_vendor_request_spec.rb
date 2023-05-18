@@ -4,14 +4,14 @@ RSpec.describe 'Create Vendor API', type: :request do
   context 'has all required attributes' do
     it 'can create a new vendor' do
       vendor_params = {
-        name: 'Widget Market Vendor',
+        name: 'Widget Vendor',
         description: 'This vendor sells widgets',
         contact_name: 'Joe Smith',
         contact_phone: '123-456-7890',
         credit_accepted: false
       }
 
-      post api_v0_vendor_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       created_vendor = Vendor.last
 
@@ -53,12 +53,12 @@ RSpec.describe 'Create Vendor API', type: :request do
   context 'has missing attributes' do
     it 'sends error details' do
       vendor_params = {
-        name: 'Widget Market Vendor',
+        name: 'Widget Vendor',
         description: 'This vendor sells widgets',
         credit_accepted: false
       }
 
-      post api_v0_vendor_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
