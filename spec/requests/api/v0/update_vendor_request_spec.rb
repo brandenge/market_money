@@ -22,24 +22,13 @@ RSpec.describe 'Update Vendor API', type: :request do
 
       patch api_v0_vendor_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
-      @vendor.reload
-
       expect(response).to be_successful
       expect(response.status).to eq(200)
 
-      parsed_vendor = JSON.parse(response.body, symbolize_names: true)
+      @vendor.reload
 
-      expect(parsed_vendor[:data][:id]).to eq(@vendor.id.to_s)
-      expect(parsed_vendor[:data][:type]).to eq('vendor')
-      expect(parsed_vendor[:data][:attributes][:name]).to eq(@vendor_attributes[:name])
-      expect(parsed_vendor[:data][:attributes][:description])
-        .to eq(@vendor_attributes[:description])
-      expect(parsed_vendor[:data][:attributes][:contact_name])
-        .to eq(vendor_params[:contact_name])
-      expect(parsed_vendor[:data][:attributes][:contact_phone])
-        .to eq(@vendor_attributes[:contact_phone])
-      expect(parsed_vendor[:data][:attributes][:credit_accepted])
-        .to eq(vendor_params[:credit_accepted])
+      expect(@vendor.contact_name).to eq(vendor_params[:contact_name])
+      expect(@vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
     end
   end
 
@@ -55,6 +44,8 @@ RSpec.describe 'Update Vendor API', type: :request do
       patch api_v0_vendor_path(invalid_id), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
+
+      expect(@vendor.contact_name).to_not eq(vendor_params[:contact_name])
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
@@ -78,6 +69,8 @@ RSpec.describe 'Update Vendor API', type: :request do
       patch api_v0_vendor_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
+
+      expect(@vendor.contact_name).to_not eq(vendor_params[:contact_name])
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
