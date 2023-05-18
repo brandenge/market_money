@@ -75,7 +75,9 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendors_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+
+      @vendor.reload
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
@@ -87,7 +89,8 @@ RSpec.describe 'Update Vendor API', type: :request do
 
       expect(error_response[:errors][0]).to have_key(:detail)
       expect(error_response[:errors][0][:detail]).to be_a(String)
-      expect(error_response[:errors][0][:detail]).to eq("Validation failed: Contact name can't be blank")
+      expect(error_response[:errors][0][:detail])
+        .to eq("Validation failed: Contact name can't be blank")
     end
   end
 end
