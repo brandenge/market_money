@@ -9,6 +9,12 @@ class Api::V0::VendorsController < ApplicationController
     render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: :created
   end
 
+  def update
+    vendor = Vendor.find(params[:id])
+    vendor.update!(strong_params)
+    render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: :ok
+  end
+
   private
 
   def strong_params

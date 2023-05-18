@@ -29,7 +29,7 @@ RSpec.describe 'Update Vendor API', type: :request do
 
       parsed_vendor = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_vendor[:data][:id]).to eq(@vendor.id)
+      expect(parsed_vendor[:data][:id]).to eq(@vendor.id.to_s)
       expect(parsed_vendor[:data][:type]).to eq('vendor')
       expect(parsed_vendor[:data][:attributes][:name]).to eq(@vendor_attributes[:name])
       expect(parsed_vendor[:data][:attributes][:description])
@@ -37,7 +37,7 @@ RSpec.describe 'Update Vendor API', type: :request do
       expect(parsed_vendor[:data][:attributes][:contact_name])
         .to eq(vendor_params[:contact_name])
       expect(parsed_vendor[:data][:attributes][:contact_phone])
-        .to eq(@vendor_attributes[:contact_name])
+        .to eq(@vendor_attributes[:contact_phone])
       expect(parsed_vendor[:data][:attributes][:credit_accepted])
         .to eq(vendor_params[:credit_accepted])
     end
