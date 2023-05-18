@@ -11,7 +11,9 @@ RSpec.describe 'Create Vendor API', type: :request do
         credit_accepted: false
       }
 
-      post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      expect(Vendor.count).to eq(0)
+      expect{ post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params) }.to change(Vendor, :count).by(1)
+      expect(Vendor.count).to eq(1)
 
       created_vendor = Vendor.last
 
@@ -37,7 +39,9 @@ RSpec.describe 'Create Vendor API', type: :request do
         credit_accepted: false
       }
 
-      post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      expect(Vendor.count).to eq(1)
+      expect{ post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params) }.to change(Vendor, :count).by(0)
+      expect(Vendor.count).to eq(1)
 
       last_vendor = Vendor.last
 
