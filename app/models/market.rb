@@ -8,4 +8,8 @@ class Market < ApplicationRecord
   def vendor_count
     vendors.count
   end
+
+  def vendors_by_market_vendor_id
+    Vendor.joins(:market_vendors).where('market_vendors.market_id': id).order('market_vendors.id')
+  end
 end
