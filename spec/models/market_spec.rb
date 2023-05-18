@@ -18,5 +18,20 @@ RSpec.describe Market, type: :model do
         expect(market.vendor_count).to eq(6)
       end
     end
+
+    describe '#vendors_by_market_vendor_id' do
+      it 'returns the list of vendors for the market, ordered by their market_vendor id' do
+        market = create(:market)
+        vendor1 = create(:vendor)
+        vendor2 = create(:vendor)
+        vendor3 = create(:vendor)
+        market_vendor1 = create(:market_vendor, market: market, vendor: vendor2)
+        market_vendor2 = create(:market_vendor, market: market, vendor: vendor3)
+        market_vendor3 = create(:market_vendor, market: market, vendor: vendor1)
+
+        expect(market.vendors_by_market_vendor_id)
+          .to eq([vendor2, vendor3, vendor1])
+      end
+    end
   end
 end
