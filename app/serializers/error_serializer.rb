@@ -3,7 +3,7 @@ class ErrorSerializer
     @error = error
   end
 
-  def format_not_found
+  def format_error
     {
       errors: [
         {

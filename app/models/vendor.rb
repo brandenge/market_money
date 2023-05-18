@@ -8,4 +8,9 @@ class Vendor < ApplicationRecord
                         :contact_phone
 
   validates :credit_accepted, exclusion: [nil]
+  # validate :credit_accepted_is_boolean
+
+  # def credit_accepted_is_boolean
+  #     errors.add(:credit_accepted, :credit_accepted_not_boolean, "The credit_accepted attribute must be true or false") unless :credit_accepted in [true, false]
+  # end
 end
