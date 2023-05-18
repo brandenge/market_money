@@ -20,7 +20,9 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      patch api_v0_vendor_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendor_path(@vendor),
+        headers: JSON_HEADER,
+        params: JSON.generate(vendor: vendor_params)
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -41,7 +43,9 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      patch api_v0_vendor_path(invalid_id), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendor_path(invalid_id),
+        headers: JSON_HEADER,
+        params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
 
@@ -57,7 +61,8 @@ RSpec.describe 'Update Vendor API', type: :request do
 
       expect(error_response[:errors][0]).to have_key(:detail)
       expect(error_response[:errors][0][:detail]).to be_a(String)
-      expect(error_response[:errors][0][:detail]).to eq("Couldn't find Vendor with 'id'=#{invalid_id}")
+      expect(error_response[:errors][0][:detail])
+        .to eq("Couldn't find Vendor with 'id'=#{invalid_id}")
     end
 
     it 'sends error details for trying to update an attribute to an empty string' do
@@ -66,7 +71,9 @@ RSpec.describe 'Update Vendor API', type: :request do
         credit_accepted: false
       }
 
-      patch api_v0_vendor_path(@vendor), headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params)
+      patch api_v0_vendor_path(@vendor),
+        headers: JSON_HEADER,
+        params: JSON.generate(vendor: vendor_params)
 
       @vendor.reload
 

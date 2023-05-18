@@ -26,11 +26,10 @@ RSpec.describe 'Destroy Vendor API', type: :request do
 
       expect(Vendor.count).to eq(1)
       expect{ delete api_v0_vendor_path(invalid_id), headers: JSON_HEADER }
-      .to change(Vendor, :count).by(0)
+        .to change(Vendor, :count).by(0)
       expect(Vendor.count).to eq(1)
-      
-      expect{ Vendor.find(@vendor.id) }
-      .to_not raise_error
+
+      expect{ Vendor.find(@vendor.id) }.to_not raise_error
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)

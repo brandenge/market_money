@@ -12,13 +12,16 @@ RSpec.describe 'Create Vendor API', type: :request do
       }
 
       expect(Vendor.count).to eq(0)
-      expect{ post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params) }.to change(Vendor, :count).by(1)
+      expect{ post api_v0_vendors_path,
+        headers: JSON_HEADER,
+        params: JSON.generate(vendor: vendor_params) }
+        .to change(Vendor, :count).by(1)
       expect(Vendor.count).to eq(1)
-
-      created_vendor = Vendor.last
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
+
+      created_vendor = Vendor.last
 
       expect(created_vendor.name).to eq(vendor_params[:name])
       expect(created_vendor.description).to eq(vendor_params[:description])
@@ -40,7 +43,10 @@ RSpec.describe 'Create Vendor API', type: :request do
       }
 
       expect(Vendor.count).to eq(1)
-      expect{ post api_v0_vendors_path, headers: JSON_HEADER, params: JSON.generate(vendor: vendor_params) }.to change(Vendor, :count).by(0)
+      expect{ post api_v0_vendors_path,
+        headers: JSON_HEADER,
+        params: JSON.generate(vendor: vendor_params) }
+        .to change(Vendor, :count).by(0)
       expect(Vendor.count).to eq(1)
 
       last_vendor = Vendor.last
