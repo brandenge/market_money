@@ -4,10 +4,10 @@ RSpec.describe 'Create Vendor API', type: :request do
   context 'has all required attributes' do
     it 'can create a new vendor' do
       vendor_params = {
-        name: 'Widget Vendor',
-        description: 'This vendor sells widgets',
-        contact_name: 'Joe Smith',
-        contact_phone: '123-456-7890',
+        name: 'Buzzy Bees',
+        description: 'local honey and wax products',
+        contact_name: 'Berly Couwer',
+        contact_phone: '8389928383',
         credit_accepted: false
       }
 
@@ -53,8 +53,8 @@ RSpec.describe 'Create Vendor API', type: :request do
   context 'has missing attributes' do
     it 'sends error details' do
       vendor_params = {
-        name: 'Widget Vendor',
-        description: 'This vendor sells widgets',
+        name: 'Buzzy Bees',
+        description: 'local honey and wax products',
         credit_accepted: false
       }
 
