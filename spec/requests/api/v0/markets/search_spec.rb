@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Search Markets API' do
+RSpec.describe 'Search Markets API', type: :request do
   context 'happy path with valid set of parameters' do
     it 'returns a list of search results' do
       market_attributes = {

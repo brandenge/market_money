@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Create Market Vendor API' do
+RSpec.describe 'Create Market Vendor API', type: :request do
   context 'successfully create a new market vendor' do
     it 'can add a vendor to a market' do
       market = create(:market)

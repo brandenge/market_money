@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AutomaticTellerMachine, type: :poros do
+RSpec.describe AutomaticTellerMachine, type: :poro do
   attributes = {
     id: 123,
     name: 'ATM',

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Destroy Market Vendor API' do
+RSpec.describe 'Destroy Market Vendor API', type: :request do
   context 'using a valid market id and vendor id combination' do
     it 'can destroy a market vendor' do
       market = create(:market)
