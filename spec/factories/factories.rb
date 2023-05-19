@@ -32,4 +32,15 @@ FactoryBot.define do
     association :market, factory: :market, strategy: :create
     association :vendor, factory: :vendor, strategy: :create
   end
+
+  factory :automatic_telling_machine do
+    skip_create
+
+    id { Faker::Number.within(range: 11..10_000) }
+    name { Faker::Bank.name }
+    address { Faker::Address.full_address }
+    lat { Faker::Address.latitude }
+    lon { Faker::Address.longitude }
+    distance { Faker::Number.between(from: 11, to: 1_000.0) }
+  end
 end
