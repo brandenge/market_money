@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       resources :vendors, only: [:show, :create, :update, :destroy]
       resources :market_vendors, only: [:create]
+      delete 'market_vendors' => 'market_vendors#destroy'
     end
   end
 end

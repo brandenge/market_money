@@ -5,7 +5,8 @@ class MarketVendor < ApplicationRecord
   validates :market_id, presence: true, numericality: true
   validates :vendor_id, presence: true, numericality: true
 
-  validate :is_unique
+  validate :is_unique, on: :create
+  validate :exists, on: :destroy_by
 
   def is_unique
     if MarketVendor.where(market_id: market_id)

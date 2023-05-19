@@ -12,6 +12,14 @@ class Api::V0::MarketVendorsController < ApplicationController
     end
   end
 
+  def destroy
+    market_vendor = MarketVendor.destroy_by(market_id: strong_params[:market_id], vendor_id: strong_params[:vendor_id])
+    if market_vendor.empty?
+      raise CustomError.new("No MarketVendor with market_id=#{strong_params[:market_id]} AND vendor_id=#{strong_params[:vendor_id]} exists", 404)
+    end
+    render body: nil, status: 204
+  end
+
   private
 
   def strong_params
