@@ -5,6 +5,14 @@ class Market < ApplicationRecord
   validates_presence_of :name,
                         :state
 
+  def self.search_params_are_valid?(name, city, state)
+    (state.nil? || state.nil? && name.nil?) ? false : true
+  end
+
+  def self.search(name, city, state)
+    where("name ILIKE '%#{name}%'").where("city ILIKE '%#{city}%'").where("state ILIKE '%#{state}%'")
+  end
+
   def vendor_count
     vendors.count
   end
