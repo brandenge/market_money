@@ -42,7 +42,7 @@ RSpec.describe 'Nearest ATMs to Market API' do
       end
 
       expect(atms[:data].sort_by{ |atm| atm[:attributes][:distance] })
-        .to eq(atms)
+        .to eq(atms[:data])
     end
   end
 
