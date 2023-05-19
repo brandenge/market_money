@@ -12,21 +12,6 @@ RSpec.describe Market, type: :model do
   end
 
   describe 'class methods' do
-    describe '::search_params_are_valid?' do
-      it 'returns true when the search params are valid' do
-        expect(Market.search_params_are_valid?(nil, nil, 'state')).to be(true)
-        expect(Market.search_params_are_valid?(nil, 'city', 'state')).to be(true)
-        expect(Market.search_params_are_valid?('name', 'city', 'state')).to be(true)
-        expect(Market.search_params_are_valid?('name', nil, 'state')).to be(true)
-        expect(Market.search_params_are_valid?('name', nil, nil)).to be(true)
-      end
-
-      it 'returns false when the search params are not valid' do
-        expect(Market.search_params_are_valid?(nil, 'city', nil)).to be(false)
-        expect(Market.search_params_are_valid?('name', 'city', nil)).to be(false)
-      end
-    end
-
     describe '::search' do
       it 'returns search results as a list of markets' do
         market_attributes = {

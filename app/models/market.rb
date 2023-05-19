@@ -5,10 +5,10 @@ class Market < ApplicationRecord
   validates_presence_of :name,
                         :state
 
-  def self.search_params_are_valid?(name, city, state)
-    ( city && state.nil? && name.nil? ||
-      city && name && state.nil? ) ? false : true
-  end
+  # def self.search_params_are_valid?(name, city, state)
+  #   ( city && state.nil? && name.nil? ||
+  #     city && name && state.nil? ) ? false : true
+  # end
 
   def self.search(name, city, state)
     case

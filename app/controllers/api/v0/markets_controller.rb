@@ -1,4 +1,6 @@
 class Api::V0::MarketsController < ApplicationController
+  include MarketHelper
+
   def index
     markets = Market.all
     render json: MarketSerializer.new(markets).serializable_hash.to_json
@@ -10,7 +12,7 @@ class Api::V0::MarketsController < ApplicationController
   end
 
   def search
-    if Market.search_params_are_valid?(search_params[:name], search_params[:city], search_params[:state])
+    if market_search_params_are_valid?(search_params[:name], search_params[:city], search_params[:state])
       search_results = Market.search(search_params[:name], search_params[:city], search_params[:state])
       render json: MarketSerializer.new(search_results).serializable_hash.to_json
     else
