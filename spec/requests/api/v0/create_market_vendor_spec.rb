@@ -30,7 +30,7 @@ RSpec.describe 'Create Market Vendor API' do
 
   context 'fails to add a market to a vendor' do
     it 'sends an error when the either the market id or the vendor id is invalid' do
-      invalid_market_id = 123123123123
+      invalid_market_id = 987654321
       vendor = create(:vendor)
 
       market_vendor_params = {
@@ -84,7 +84,7 @@ RSpec.describe 'Create Market Vendor API' do
       expect(error_response[:errors][0]).to have_key(:detail)
       expect(error_response[:errors][0][:detail]).to be_a(String)
       expect(error_response[:errors][0][:detail])
-        .to eq("Validation failed: Vendor id can't be blank")
+        .to eq("Validation failed: Vendor must exist, Vendor can't be blank, Vendor is not a number")
     end
 
     it 'sends an error when the market vendor association already exists' do
@@ -115,7 +115,7 @@ RSpec.describe 'Create Market Vendor API' do
       expect(error_response[:errors][0]).to have_key(:detail)
       expect(error_response[:errors][0][:detail]).to be_a(String)
       expect(error_response[:errors][0][:detail])
-        .to eq("Validation failed: Market vendor asociation between market with market_id=#{market.id} and vendor_id=#{vendor.id} already exists")
+        .to eq("Validation failed: Market vendor association between market with market_id=#{market.id} and vendor_id=#{vendor.id} already exists")
     end
   end
 end
