@@ -6,19 +6,17 @@ class Api::V0::VendorsController < ApplicationController
 
   def create
     vendor = Vendor.create!(strong_params)
-    render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: :created
+    render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: 201
   end
 
   def update
-    vendor = Vendor.find(params[:id])
-    vendor.update!(strong_params)
-    render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: :ok
+    vendor = Vendor.update!(params[:id], strong_params)
+    render json: VendorSerializer.new(vendor).serializable_hash.to_json, status: 200
   end
 
   def destroy
-    vendor = Vendor.find(params[:id])
-    vendor.destroy!
-    render body: nil, status: :no_content
+    Vendor.destroy(params[:id])
+    render body: nil, status: 204
   end
 
   private
