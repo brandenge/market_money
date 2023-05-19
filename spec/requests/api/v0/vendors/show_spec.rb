@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Vendor API', type: :request do
+RSpec.describe 'Show Vendor API', type: :request do
   context 'using a valid vendor id' do
     it 'sends the requested vendor' do
       vendor_object = create(:vendor)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Market API', type: :request do
+RSpec.describe 'Show Market API', type: :request do
   context 'using a valid market id' do
     it 'sends the requested market' do
       market_object = create(:market)
