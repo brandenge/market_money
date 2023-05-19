@@ -6,11 +6,23 @@ class Market < ApplicationRecord
                         :state
 
   def self.search_params_are_valid?(name, city, state)
-    (state.nil? || state.nil? && name.nil?) ? false : true
+    ( city && state.nil? && name.nil? ||
+      city && name && state.nil? ) ? false : true
   end
 
   def self.search(name, city, state)
-    where("name ILIKE '%#{name}%'").where("city ILIKE '%#{city}%'").where("state ILIKE '%#{state}%'")
+    case
+    when name.nil? && city.nil?
+      where("state ILIKE '%#{state}%'")
+    when name.nil?
+      where("state ILIKE '%#{state}%'").where("city ILIKE '%#{city}%'")
+    when city.nil? && state.nil?
+      where("name ILIKE '%#{name}%'")
+    when city.nil?
+      where("state ILIKE '%#{state}%'").where("name ILIKE '%#{name}%'")
+    else
+      where("state ILIKE '%#{state}%'").where("city ILIKE '%#{city}%'").where("name ILIKE '%#{name}%'")
+    end
   end
 
   def vendor_count
