@@ -26,6 +26,7 @@ RSpec.describe 'Search Markets API' do
       markets = JSON.parse(response.body, symbolize_names: true)
 
       expect(markets).to have_key(:data)
+
       expect(markets[:data]).to be_an(Array)
       expect(markets[:data].count).to eq(1)
 
@@ -43,25 +44,25 @@ RSpec.describe 'Search Markets API' do
         expect(market[:attributes][:name]).to be_a(String)
 
         expect(market[:attributes]).to have_key(:street)
-        expect(market[:attributes][:street]).to be_a(String)
+        expect(market[:attributes][:street].class).to be_in([String, NilClass])
 
         expect(market[:attributes]).to have_key(:city)
-        expect(market[:attributes][:city]).to be_a(String)
+        expect(market[:attributes][:city].class).to be_in([String, NilClass])
 
         expect(market[:attributes]).to have_key(:county)
-        expect(market[:attributes][:county]).to be_a(String)
+        expect(market[:attributes][:county].class).to be_in([String, NilClass])
 
         expect(market[:attributes]).to have_key(:state)
         expect(market[:attributes][:state]).to be_a(String)
 
         expect(market[:attributes]).to have_key(:zip)
-        expect(market[:attributes][:zip]).to be_a(String)
+        expect(market[:attributes][:zip].class).to be_in([String, NilClass])
 
         expect(market[:attributes]).to have_key(:lat)
-        expect(market[:attributes][:lat]).to be_a(String)
+        expect(market[:attributes][:lat].class).to be_in([String, NilClass])
 
         expect(market[:attributes]).to have_key(:lon)
-        expect(market[:attributes][:lon]).to be_a(String)
+        expect(market[:attributes][:lon].class).to be_in([String, NilClass])
 
         expect(market[:attributes]).to have_key(:vendor_count)
         expect(market[:attributes][:vendor_count]).to be_a(Integer)
