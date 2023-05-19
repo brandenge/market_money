@@ -1,4 +1,4 @@
-class Api::V0::Market::NearestAtmsController < ApplicationController
+class Api::V0::Market::NearestAtmController < ApplicationController
   def index
     market = Market.find(params[:market_id])
     atms = AutomaticTellerMachineFacade.new(market).nearest_atms

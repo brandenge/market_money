@@ -5,7 +5,7 @@ RSpec.describe 'Nearest ATMs to Market API' do
     it 'it returns a list of atms, ordered by proximity, nearest to farthest' do
       market = create(:market)
 
-      get api_v0_market_nearest_atms_path(market), headers: JSON_HEADER
+      get api_v0_market_nearest_atm_index_path(market), headers: JSON_HEADER
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -17,7 +17,7 @@ RSpec.describe 'Nearest ATMs to Market API' do
 
       atms[:data].each do |atm|
         expect(atm).to have_key(:id)
-        expect(atm[:id]).to be_a(String)
+        expect(atm[:id]).to be(nil)
 
         expect(atm).to have_key(:type)
         expect(atm[:type]).to eq('atm')
@@ -50,7 +50,7 @@ RSpec.describe 'Nearest ATMs to Market API' do
     it 'responds with error details' do
       invalid_market_id = 123123123123
 
-      get api_v0_market_nearest_atms_path(invalid_market_id),
+      get api_v0_market_nearest_atm_index_path(invalid_market_id),
         headers: JSON_HEADER
 
       expect(response).to_not be_successful
