@@ -3,7 +3,7 @@ class ErrorSerializer
     @error = error
   end
 
-  def format_error
+  def serialize_json
     {
       errors: [
         {
