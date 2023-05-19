@@ -1,8 +1,9 @@
 class TomTomService
-  API_DOMAIN = 'https://api.tomtom.com'
+  API_DOMAIN = 'https://api.tomtom.com'.freeze
+  BASE_URL = "https://api.tomtom.com/search/2/nearbySearch/.json?key=#{ENV['TOM_TOM_API_KEY']}&categorySet=7397".freeze
 
   def nearest_atms(lat, lon)
-    url = "#{API_DOMAIN}/search/2/categorySearch/automatic%20teller%20machine.json?key=#{ENV['TOM_TOM_API_KEY']}&lat=#{lat}&lon=#{lon}"
+    url = "#{BASE_URL}&lat=#{lat}&lon=#{lon}"
     parsed_atms = get_url(url)[:results]
     atm_hashes(parsed_atms)
   end
