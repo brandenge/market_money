@@ -11,6 +11,51 @@ RSpec.describe Market, type: :model do
     it { should validate_presence_of(:state) }
   end
 
+  describe 'class methods' do
+    describe '::search_params_are_valid?' do
+      it 'returns true when the search params are valid' do
+        expect(Market.search_params_are_valid?(nil, nil, 'state')).to be(true)
+        expect(Market.search_params_are_valid?(nil, 'city', 'state')).to be(true)
+        expect(Market.search_params_are_valid?('name', 'city', 'state')).to be(true)
+        expect(Market.search_params_are_valid?('name', nil, 'state')).to be(true)
+        expect(Market.search_params_are_valid?('name', nil, nil)).to be(true)
+      end
+
+      it 'returns false when the search params are not valid' do
+        expect(Market.search_params_are_valid?(nil, 'city', nil)).to be(false)
+        expect(Market.search_params_are_valid?('name', 'city', nil)).to be(false)
+      end
+    end
+
+    describe '::search' do
+      it 'returns search results as a list of markets' do
+        market_attributes = {
+          name: "Nob Hill Growers' Market",
+          street: 'Lead & Morningside SE',
+          city: 'Albuquerque',
+          county: 'Bernalillo',
+          state: 'New Mexico',
+          zip: nil,
+          lat: '35.077529',
+          lon: '-106.600449',
+        }
+
+        market = create(:market_with_vendors, vendor_count: 5, **market_attributes)
+
+        expect(Market.search(nil, nil, 'new mex').count).to eq(1)
+        expect(Market.search(nil, 'alb', 'new mex').count).to eq(1)
+        expect(Market.search('nob', nil, nil).count).to eq(1)
+        expect(Market.search('nob', nil, 'new mex').count).to eq(1)
+        expect(Market.search('nob', 'alb', 'new mex').count).to eq(1)
+        expect(Market.search('nob', 'alb', 'new mex')).to all(be_a(Market))
+      end
+
+      it 'returns an empty list if there are no search results' do
+        expect(Market.search('321ager', '23grea', '34t4g')).to eq([])
+      end
+    end
+  end
+
   describe 'instance methods' do
     describe '#vendor_count' do
       it 'returns the number of vendors for the market' do
