@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Nearest ATMs to Market API' do
+RSpec.describe 'Nearest ATMs to Market API', vcr: { record: :new_episodes } do
   context 'happy path with valid market id' do
     it 'it returns a list of atms, ordered by proximity, nearest to farthest' do
       market = create(:market)
